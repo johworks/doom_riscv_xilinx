@@ -3,7 +3,6 @@ CROSS ?= riscv-none-embed-
 CC = $(CROSS)gcc
 OBJCOPY = $(CROSS)objcopy
 SIZE = $(CROSS)size
-ICEPROG = iceprog
 
 CFLAGS=-Wall -O2 -march=rv32im -mabi=ilp32 -ffreestanding -flto -nostartfiles -fomit-frame-pointer -Wl,--gc-section --specs=nano.specs -I..
 
@@ -49,11 +48,12 @@ clean:
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
 
-prog: doom-riscv.bin
-	$(ICEPROG) -o 1M $<
+# These are for the ICE40
+#prog: doom-riscv.bin
+#	$(ICEPROG) -o 1M $<
 
-prog_wad: data/doomu.wad
-	$(ICEPROG) -o 2M $<
+#prog_wad: data/doomu.wad
+#	$(ICEPROG) -o 2M $<
 
 
 .PHONY: all clean prog prog_wad
